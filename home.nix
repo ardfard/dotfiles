@@ -1,11 +1,18 @@
 { pkgs, ... }: {
-  home.username = "ardfard";
-  home.homeDirectory = "/home/ardfard";
-  home.stateVersion = "22.11";
-  home.packages = [
-    pkgs.tmux
-    pkgs.rnix-lsp
-  ];
+
+  home = {
+    username = "ardfard";
+    homeDirectory = "/home/ardfard";
+    stateVersion = "22.11";
+    packages = [
+      pkgs.tmux
+      pkgs.rnix-lsp
+    ];
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
+  };
+
   programs.home-manager.enable = true;
   programs.neovim.enable = true;
   programs.git = {
