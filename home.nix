@@ -4,13 +4,16 @@
     username = "ardfard";
     homeDirectory = "/home/ardfard";
     stateVersion = "22.11";
-    packages = [
-      pkgs.tmux
-      pkgs.rnix-lsp
+    packages = with pkgs; [
+      rnix-lsp
+      perl
+      cachix
+      tree
     ];
     sessionVariables = {
       EDITOR = "nvim";
     };
+
   };
 
   programs.home-manager.enable = true;
@@ -41,5 +44,18 @@
     history = {
       size = 10000;
     };
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.tmux = {
+    enable = true;
+    shortcut = "a";
+    baseIndex = 1;
+    newSession = true;
   };
 }
