@@ -35,7 +35,7 @@
 
       homeConfigurations = {
         ${user} = home-manager.lib.homeManagerConfiguration {
-          inherit system pkgs;
+          inherit pkgs;
 
           modules = [ ./home.nix ];
         };
