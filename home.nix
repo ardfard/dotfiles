@@ -33,7 +33,7 @@
         rev = "master";
         sha256 = "sha256-0Q";
       } + "/.tmux.conf";
-    file.".tmux.conf.local".source = "./.tmux.conf.local";
+    file.".tmux.conf.local".source = ./.tmux.conf.local;
   };
 
   programs.home-manager.enable = true;
