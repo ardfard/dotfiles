@@ -14,7 +14,7 @@
   };
 
   outputs =
-    { self, nixpkgs, home-manager, flake-utils, ... }:
+    inputs @ { self, nixpkgs, home-manager, flake-utils, ... }:
     let
       user = "ardfard";
       system = "x86_64-linux";
