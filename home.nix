@@ -15,6 +15,15 @@
       EDITOR = "nvim";
     };
 
+    shellAliases = {
+      ls = "ls --color=auto";
+      ll = "ls -l";
+      la = "ls -la";
+      l = "ls -CF";
+      grep = "grep --color=auto";
+      egrep = "egrep --color=auto";
+      fgrep = "fgrep --color=auto";
+    };
   };
 
   programs.home-manager.enable = true;
