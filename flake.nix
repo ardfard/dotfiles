@@ -14,6 +14,7 @@
   };
 
   outputs =
+    { self, nixpkgs, home-manager, flake-utils, ... }:
     let
       user = "ardfard";
       system = "x86_64-linux";
@@ -21,7 +22,7 @@
         config.allowUnfree = true;
       };
     in
-    { self, nixpkgs, home-manager, flake-utils, ... }: {
+    {
       defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
 
       nixosConfigurations = (
