@@ -49,8 +49,12 @@
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     enableCompletion = true;
-    dotDir = ".config/zsh";
-
+    initExtra = ''
+      if [ -z "$SSH_AUTH_SOCK" ] ; then
+        eval $(ssh-agent -s)
+        ssh-add
+      fi
+    '';
     history = {
       size = 10000;
     };
