@@ -10,6 +10,7 @@
       cachix
       tree
       go_1_18
+      tmux
     ];
     sessionVariables = {
       EDITOR = "nvim";
@@ -24,6 +25,15 @@
       egrep = "egrep --color=auto";
       fgrep = "fgrep --color=auto";
     };
+
+    file."tmux.conf".source = pkgs.fetchFromGithub
+      {
+        owner = "gpakosz";
+        repo = ".tmux";
+        rev = "master";
+        sha256 = "sha256-0Q";
+      } + "/.tmux.conf";
+    file.".tmux.conf.local".source = "./.tmux.conf.local";
   };
 
   programs.home-manager.enable = true;
@@ -66,10 +76,11 @@
     enableZshIntegration = true;
   };
 
-  programs.tmux = {
-    enable = true;
-    shortcut = "a";
-    baseIndex = 1;
-    newSession = true;
+  programs = {
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+      tmux.enableShellIntegration = true;
+    };
   };
 }
