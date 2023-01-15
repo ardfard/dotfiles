@@ -1,5 +1,5 @@
 {
-  description = "My Home Manager Flake";
+  description = "ardfard Nixos Flake configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -13,15 +13,28 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... }: {
-    defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
+  outputs =
+    let user = "ardfard";
+    in
+    { self, nixpkgs, home-manager, flake-utils, ... }: {
+      defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
 
-    homeConfigurations = {
-      "ardfard" = home-manager.lib.homeManagerConfiguration {
+      nixosConfigurations = (
+        import ./hosts {
+          inherit (pkgs) lib;
+          inherit inputs nixpkgs home-manager user;
+        }
+      );
 
-        pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
-        modules = [ ./home.nix ];
+      homeConfigurations = {
+        ${user} = home-manager.lib.homeManagerConfiguration {
+
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          modules = [ ./home.nix ];
+        };
       };
     };
-  };
 }
