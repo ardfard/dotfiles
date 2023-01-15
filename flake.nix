@@ -14,7 +14,12 @@
   };
 
   outputs =
-    let user = "ardfard";
+    let
+      user = "ardfard";
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        config.allowUnfree = true;
+      };
     in
     { self, nixpkgs, home-manager, flake-utils, ... }: {
       defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
@@ -22,17 +27,14 @@
       nixosConfigurations = (
         import ./hosts {
           inherit (pkgs) lib;
-          inherit inputs nixpkgs home-manager user;
+          inherit inputs pkgs home-manager user;
         }
       );
 
       homeConfigurations = {
         ${user} = home-manager.lib.homeManagerConfiguration {
+          inherit system pkgs;
 
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
           modules = [ ./home.nix ];
         };
       };

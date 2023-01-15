@@ -1,9 +1,4 @@
-{ inputs, nixpkgs, home-manager, user, system, ... }:
-let pkgs = import nixpkgs {
-  inherit system;
-  config.allowUnfree = true;
-};
-in
+{ inputs, pkgs, home-manager, user, system, ... }:
 {
   wsl = lib.nixosSystem {
 
