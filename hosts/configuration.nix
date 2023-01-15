@@ -8,6 +8,8 @@
     initialPassword = "letmein";
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
   time.timeZone = "Asia/Jakarta";
   environment.systemPackages = with pkgs; [ vim git wget ];
 
