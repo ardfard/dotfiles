@@ -28,7 +28,7 @@
       nixosConfigurations = (
         import ./hosts {
           inherit (pkgs) lib;
-          inherit inputs pkgs home-manager user;
+          inherit system inputs pkgs home-manager user;
         }
       );
 
