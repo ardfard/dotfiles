@@ -9,6 +9,7 @@
       perl
       cachix
       tree
+      go_1_18
     ];
     sessionVariables = {
       EDITOR = "nvim";
