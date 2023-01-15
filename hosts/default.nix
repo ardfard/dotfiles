@@ -5,7 +5,7 @@
     inherit system;
 
     specialArgs = {
-      inherit inputs users;
+      inherit inputs user;
     };
 
     modules = [
