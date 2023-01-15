@@ -1,4 +1,4 @@
-{ inputs, pkgs, home-manager, user, system, ... }:
+{ lib, inputs, pkgs, home-manager, user, system, ... }:
 {
   wsl = lib.nixosSystem {
 
