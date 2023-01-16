@@ -35,8 +35,6 @@ in
         grep = "grep --color=auto";
         egrep = "egrep --color=auto";
         fgrep = "fgrep --color=auto";
-        vim = "nvim";
-        vi = "nvim";
       };
 
       file.".tmux.conf".source = pkgs.fetchFromGitHub
@@ -86,6 +84,11 @@ in
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     enableCompletion = true;
+    shellAliases = {
+      vim = "nvim";
+      vi = "nvim";
+      e = "nvim";
+    };
     initExtra = ''
         if [ -z "$SSH_AUTH_SOCK" ];
       then
