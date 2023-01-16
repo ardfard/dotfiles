@@ -1,60 +1,74 @@
 { pkgs, ... }:
-let
-  nvimConfig = pkgs.fetchFromGithub {
-    owner = "ardfard";
-    repo = ".vimrc";
-    rev = "master";
-    sha256 = "21cbbf12fdc79cb3de354e020da84e1316d36212";
-  };
+let nvimConfig = pkgs.fetchFromGitHub {
+  owner = "ardfard";
+  repo = ".vim";
+  rev = "master";
+  sha256 = "sha256-TP96khypXA7pmGU1Q33Dtz2xQjKUfjlL4EVOOUAtO3U=";
+};
 in
 {
 
-  home = {
-    username = "ardfard";
-    homeDirectory = "/home/ardfard";
-    stateVersion = "22.11";
-    packages = with pkgs; [
-      rnix-lsp
-      perl
-      cachix
-      tree
-      tmux
-    ];
-    sessionVariables = {
-      EDITOR = "nvim";
+  home =
+    {
+      username = "ardfard";
+      homeDirectory = "/home/ardfard";
+      stateVersion = "22.11";
+      packages = with pkgs; [
+        rnix-lsp
+        perl
+        cachix
+        tree
+        tmux
+        htop
+        neovim
+      ];
+      sessionVariables = {
+        EDITOR = "nvim";
+      };
+
+
+      shellAliases = {
+        ls = "ls --color=auto";
+        ll = "ls -l";
+        la = "ls -la";
+        l = "ls -CF";
+        grep = "grep --color=auto";
+        egrep = "egrep --color=auto";
+        fgrep = "fgrep --color=auto";
+        vim = "nvim";
+        vi = "nvim";
+      };
+
+      file.".tmux.conf".source = pkgs.fetchFromGitHub
+        {
+          owner = "gpakosz";
+          repo = ".tmux";
+          rev = "master";
+          sha256 = "sha256-bA0da2nIIEQUCtervsiZLNQ2V6+OizBr8Uqz94sGV1A=";
+        } + "/.tmux.conf";
+      file.".tmux.conf.local".source = ./.tmux.conf.local;
+
+      file.".config/vimrc".source = nvimConfig;
+      file.".vimrc".source = nvimConfig + "/.vimrc";
+
     };
 
-    shellAliases = {
-      ls = "ls --color=auto";
-      ll = "ls -l";
-      la = "ls -la";
-      l = "ls -CF";
-      grep = "grep --color=auto";
-      egrep = "egrep --color=auto";
-      fgrep = "fgrep --color=auto";
-      vim = nvim;
+  xdg = {
+    enable = true;
+    configHome = "/home/ardfard/.config";
+    configFile."nvim/init.vim".source = nvimConfig + "/.vimrc";
+    configFile."nvim/site/autoload/plug.vim".source = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
+      sha256 = "sha256-4tvXyNcyrnl+UFnA3B6WS5RSmjLQfQUdXQWHJ0YqQ/0=";
     };
-
-    file.".tmux.conf".source = pkgs.fetchFromGitHub
-      {
-        owner = "gpakosz";
-        repo = ".tmux";
-        rev = "master";
-        sha256 = "sha256-bA0da2nIIEQUCtervsiZLNQ2V6+OizBr8Uqz94sGV1A=";
-      } + "/.tmux.conf";
-    file.".tmux.conf.local".source = ./.tmux.conf.local;
-
-    file.".config/nvim/init.vim".source = nvimConfig + "/.vimrc";
-    file.".vimrc".source = nvimConfig + "/.vimrc";
-
   };
 
   programs.home-manager.enable = true;
-  programs.neovim.enable = true;
+
   programs.git = {
     enable = true;
-    userName = "ardfard";
-    userEmail = "ardfarde@gmail.com";
+    userName = " ardfard ";
+    userEmail = " ardfarde@gmail.com";
   };
 
   programs.zsh = {
@@ -98,4 +112,5 @@ in
     };
   };
 }
+
 
