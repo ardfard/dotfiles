@@ -25,7 +25,6 @@ in
       tree
       tmux
       htop
-      neovim
     ];
     sessionVariables = {
       EDITOR = "nvim";
@@ -48,19 +47,12 @@ in
         sha256 = "sha256-bA0da2nIIEQUCtervsiZLNQ2V6+OizBr8Uqz94sGV1A=";
       } + "/.tmux.conf";
     file.".tmux.conf.local".source = ./.tmux.conf.local;
-    file.".config/vimrc".source = nvimConfig;
-    file.".vimrc".source = nvimConfig + "/.vimrc";
 
   };
 
   xdg = {
     enable = true;
     configHome = "/home/ardfard/.config";
-    configFile."nvim/init.vim".source = nvimConfig + "/.vimrc";
-    configFile."nvim/site/autoload/plug.vim".source = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
-      sha256 = "sha256-4tvXyNcyrnl+UFnA3B6WS5RSmjLQfQUdXQWHJ0YqQ/0=";
-    };
   };
 
 

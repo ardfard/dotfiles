@@ -26,6 +26,7 @@ let
   };
 in
 [
+  ./neovim
   ./zsh
   more
 ]
