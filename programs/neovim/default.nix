@@ -14,7 +14,7 @@
       nvim-treesitter.withAllGrammars
     ];
 
-    extra-config =
+    extraConfig =
       let
         vimConfig = builtins.map builtins.readFile [
           ./general.vim
