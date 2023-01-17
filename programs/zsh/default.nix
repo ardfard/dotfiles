@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, ... }: {
   programs.zsh = {
     oh-my-zsh = {
       enable = true;

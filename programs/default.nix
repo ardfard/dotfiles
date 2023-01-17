@@ -1,6 +1,6 @@
 let
-  more = {
-    programs = { pkgs, ... }: {
+  more = { pkgs, ... }: {
+    programs = {
       git = {
         enable = true;
         userName = " ardfard ";
