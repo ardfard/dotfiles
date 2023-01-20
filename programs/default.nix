@@ -21,11 +21,11 @@ let
 
       jq.enable = true;
 
-
     };
   };
 in
 [
   ./zsh
+  ./astronvim
   more
 ]
