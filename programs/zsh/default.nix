@@ -9,7 +9,6 @@
         "fzf"
         "kubectl"
         "gcloud"
-        "nix-shell"
       ];
     };
     enable = true;
