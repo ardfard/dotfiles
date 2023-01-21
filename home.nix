@@ -20,11 +20,16 @@ in
     stateVersion = "22.11";
     packages = with pkgs; [
       rnix-lsp
+      gcc
+      rust-analyzer
+      pyright
       perl
       cachix
       tree
       tmux
       htop
+      sumneko-lua-language-server
+      terraform-ls
     ];
     sessionVariables = {
       EDITOR = "nvim";
