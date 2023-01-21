@@ -2,11 +2,14 @@
   programs.zsh = {
     oh-my-zsh = {
       enable = true;
-      theme = "robbyrussell";
+      theme = "half-life";
       plugins = [
         "git"
+        "git-extras"
+        "fzf"
         "kubectl"
         "gcloud"
+        "nix-shell"
       ];
     };
     enable = true;
