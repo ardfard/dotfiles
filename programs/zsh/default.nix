@@ -18,6 +18,7 @@
       vim = "nvim";
       vi = "nvim";
       e = "nvim";
+      mvim = "nvim";
     };
     initExtra = ''
       if [ -z "$SSH_AUTH_SOCK" ];
@@ -25,6 +26,7 @@
         eval $(ssh-agent -s)
         ssh-add
       fi
+      . /home/ardfard/.nix-profile/etc/profile.d/nix.sh
     '';
     history = {
       size = 10000;
