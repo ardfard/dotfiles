@@ -1,10 +1,44 @@
 { pkgs, ... }:
-let nvimConfig = pkgs.fetchFromGitHub {
-  owner = "ardfard";
-  repo = ".vim";
-  rev = "master";
-  sha256 = "sha256-TP96khypXA7pmGU1Q33Dtz2xQjKUfjlL4EVOOUAtO3U=";
-};
+let
+  nvimConfig = pkgs.fetchFromGitHub {
+    owner = "ardfard";
+    repo = ".vim";
+    rev = "master";
+    sha256 = "sha256-TP96khypXA7pmGU1Q33Dtz2xQjKUfjlL4EVOOUAtO3U=";
+  };
+
+  # mvim is a minimal vim
+  mvim =
+    let
+      minimalVim = pkgs.neovim.override {
+        configure = {
+          customRC = ''
+            lua << EOF
+              require'nvim-treesitter.configs'.setup {
+                highlight = {
+                  enable = true
+                }
+              }
+            EOF
+          '';
+          packages.minimalVim = with pkgs.vimPlugins;{
+            start = [ nvim-treesitter.withAllGrammars fzf-vim ];
+          };
+        };
+      };
+    in
+    pkgs.writeTextFile
+      {
+        name = "mvim";
+        text = ''
+          #!${pkgs.bash}/bin/bash
+          export XDG_CONFIG_HOME=~/.config/mvim 
+          export XDG_DATA_HOME=~/.local/share/mvim 
+          ${minimalVim}/bin/nvim "$@"
+        '';
+        executable = true;
+        destination = "/bin/mvim";
+      };
 in
 {
 
@@ -31,6 +65,7 @@ in
       sumneko-lua-language-server
       terraform-ls
       yaml-language-server
+      mvim
     ];
     sessionVariables = {
       EDITOR = "nvim";
