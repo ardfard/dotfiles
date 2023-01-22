@@ -20,7 +20,7 @@
       vim = "nvim";
       vi = "nvim";
       e = "nvim";
-      mvim = "nvim";
+      mvim = "XDG_CONFIG_HOME=~/.config/mvim XDG_DATA_HOME=~/.local/share/mvim/ nvim";
     };
     initExtra = ''
       if [ -z "$SSH_AUTH_SOCK" ];

@@ -30,6 +30,7 @@ in
       htop
       sumneko-lua-language-server
       terraform-ls
+      yaml-language-server
     ];
     sessionVariables = {
       EDITOR = "nvim";

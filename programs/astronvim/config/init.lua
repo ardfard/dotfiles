@@ -142,7 +142,8 @@ local config = {
                         "rnix",
                         "pyright",
                         "sumneko_lua",
-                        "terraformls"
+                        "terraformls",
+                        "yamlls"
                 },
                 formatting = {
                         -- control auto formatting on save
@@ -265,7 +266,8 @@ local config = {
                                 "python",
                                 "lua",
                                 "markdown",
-                                "terraform"
+                                "terraform",
+                                "yaml"
                         },
                 },
                 -- use mason-lspconfig to configure LSP installations

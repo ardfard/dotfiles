@@ -21,6 +21,7 @@ in
       description = "AstronVim User Config";
       type = with types; nullOr path;
     };
+
   };
 
   config = mkIf (cfg.enable)
@@ -35,6 +36,11 @@ in
       xdg.configFile."nvim/lua/user" = mkIf (cfg.userConfig != null) {
         recursive = true;
         source = cfg.userConfig;
+      };
+
+      xdg.dataFile."nvim/site/pack/packer/opt/nvim-treesitter" = {
+        recursive = true;
+        source = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
       };
     };
 }
