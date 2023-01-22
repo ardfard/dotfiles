@@ -29,6 +29,7 @@
         ssh-add
       fi
       . /home/ardfard/.nix-profile/etc/profile.d/nix.sh
+      tmux new -s default
     '';
     history = {
       size = 10000;
