@@ -28,7 +28,9 @@
         ssh-add
       fi
       . /home/ardfard/.nix-profile/etc/profile.d/nix.sh
-      tmux new 
+      if [ -z "$TMUX" ]; then
+        tmux new 
+      fi
     '';
     history = {
       size = 10000;
