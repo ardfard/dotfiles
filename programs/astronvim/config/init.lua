@@ -145,7 +145,8 @@ local config = {
                         "terraformls",
                         "yamlls",
                         "gopls",
-                        "golangci_lint_ls"
+                        "golangci_lint_ls",
+                        "bufls"
                 },
                 formatting = {
                         -- control auto formatting on save
