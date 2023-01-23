@@ -143,7 +143,9 @@ local config = {
                         "pyright",
                         "sumneko_lua",
                         "terraformls",
-                        "yamlls"
+                        "yamlls",
+                        "gopls",
+                        "golangci_lint_ls"
                 },
                 formatting = {
                         -- control auto formatting on save

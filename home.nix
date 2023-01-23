@@ -66,6 +66,9 @@ in
       terraform-ls
       yaml-language-server
       mvim
+      golangci-lint-langserver
+      golangci-lint
+      gopls
     ];
     sessionVariables = {
       EDITOR = "nvim";
