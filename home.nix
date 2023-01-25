@@ -69,6 +69,7 @@ in
       golangci-lint-langserver
       golangci-lint
       gopls
+      vscode-extensions.llvm-org.lldb-vscode
     ];
     sessionVariables = {
       EDITOR = "nvim";
@@ -98,6 +99,5 @@ in
     enable = true;
     configHome = "/home/ardfard/.config";
   };
-
 
 }

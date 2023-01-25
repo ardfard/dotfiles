@@ -136,9 +136,9 @@ local config = {
 
         -- Extend LSP configuration
         lsp = {
+                skip_setup = { "rust_analyzer" },
                 -- enable servers that you already have installed without mason
                 servers = {
-                        "rust_analyzer",
                         "rnix",
                         "pyright",
                         "sumneko_lua",
@@ -195,6 +195,15 @@ local config = {
                         --     },
                         --   },
                         -- },
+                        --
+
+                        rust_analyzer = {
+                                on_attach = function(_, bufnr)
+                                        local rt = require("rust-tools")
+                                        vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions,
+                                                { buffer = bufnr })
+                                end
+                        }
                 },
         },
 
@@ -218,83 +227,6 @@ local config = {
                 t = {
                         -- setting a mapping to false will disable it
                         -- ["<esc>"] = false,
-                },
-        },
-
-        -- Configure plugins
-        plugins = {
-                init = {
-                        -- You can disable default plugins as follows:
-                        -- ["goolord/alpha-nvim"] = { disable = true },
-
-                        -- You can also add new plugins here as well:
-                        -- Add plugins, the packer syntax without the "use"
-                        -- { "andweeb/presence.nvim" },
-                        -- {
-                        --   "ray-x/lsp_signature.nvim",
-                        --   event = "BufRead",
-                        --   config = function()
-                        --     require("lsp_signature").setup()
-                        --   end,
-                        -- },
-
-                        -- We also support a key value style plugin definition similar to NvChad:
-                        -- ["ray-x/lsp_signature.nvim"] = {
-                        --   event = "BufRead",
-                        --   config = function()
-                        --     require("lsp_signature").setup()
-                        --   end,
-                        -- },
-                },
-                -- All other entries override the require("<key>").setup({...}) call for default plugins
-                ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
-                        -- config variable is the default configuration table for the setup function call
-                        -- local null_ls = require "null-ls"
-
-                        -- Check supported formatters and linters
-                        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-                        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-                        config.sources = {
-                                -- Set a formatter
-                                -- null_ls.builtins.formatting.stylua,
-                                -- null_ls.builtins.formatting.prettier,
-                        }
-                        return config -- return final config table
-                end,
-                treesitter = { -- overrides `require("treesitter").setup(...)`
-                        ensure_installed = {
-                                "nix",
-                                "rust",
-                                "python",
-                                "lua",
-                                "markdown",
-                                "terraform",
-                                "yaml"
-                        },
-                },
-                -- use mason-lspconfig to configure LSP installations
-                ["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
-                        --  ensure_installed = { "rust_analyzer" },
-                },
-                -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
-                ["mason-null-ls"] = { -- overrides `require("mason-null-ls").setup(...)`
-                        -- ensure_installed = { "prettier", "stylua" },
-                },
-                ["mason-nvim-dap"] = { -- overrides `require("mason-nvim-dap").setup(...)`
-                        -- ensure_installed = { "python" },
-                },
-        },
-
-        -- LuaSnip Options
-        luasnip = {
-                -- Extend filetypes
-                filetype_extend = {
-                        -- javascript = { "javascriptreact" },
-                },
-                -- Configure luasnip loaders (vscode, lua, and/or snipmate)
-                vscode = {
-                        -- Add paths for including more VS Code style snippets in luasnip
-                        paths = {},
                 },
         },
 
@@ -372,6 +304,33 @@ local config = {
                 --   },
                 -- }
         end,
+
+        dap = {
+                adapters = {
+                        lldb = {
+                                type = 'executable',
+                                command = 'lldb-vscode',
+                                name = 'lldb'
+                        }
+                },
+                configurations = {
+                        rust = {
+                                {
+                                        name = 'Debug executable',
+                                        type = 'lldb',
+                                        request = 'launch',
+                                        program = function()
+                                                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/',
+                                                        'file')
+                                        end,
+                                        cwd = '${workspaceFolder}',
+                                        stopOnEntry = false,
+                                        args = {}
+                                }
+                        }
+                }
+
+        }
 }
 
 return config
