@@ -37,5 +37,10 @@ return {
         -- Configuration here, or leave empty to use defaults
       })
     end
+  },
+  {
+    "tpope/copilot",
+    config = function()
+    end
   }
 }
