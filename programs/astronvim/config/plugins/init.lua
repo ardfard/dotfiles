@@ -39,8 +39,24 @@ return {
     end
   },
   {
-    "tpope/copilot",
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
     config = function()
+      require("copilot").setup({
+        filetypes = {
+          markdown = true,
+          ['.'] = true
+        },
+      })
+    end
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function()
+      require("copilot_cmp").setup(
+        { method = "getCompletionsCycling", }
+      )
     end
   }
 }

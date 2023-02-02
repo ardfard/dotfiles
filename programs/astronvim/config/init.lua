@@ -244,6 +244,9 @@ local config = {
                         buffer = 500,
                         path = 250,
                 },
+                sources = {
+                        { name = "copilot", group_index = 2 },
+                }
         },
 
         -- Customize Heirline options

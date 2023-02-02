@@ -70,6 +70,7 @@ in
       golangci-lint
       gopls
       vscode-extensions.llvm-org.lldb-vscode
+      nodejs
     ];
     sessionVariables = {
       EDITOR = "nvim";
