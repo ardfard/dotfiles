@@ -22,6 +22,7 @@
       e = "nvim";
     };
     initExtra = ''
+      export GPG_TTY=$(tty) 
       if [ -z "$SSH_AUTH_SOCK" ];
         then
         eval $(ssh-agent -s)
