@@ -32,6 +32,7 @@
       if [ -z "$TMUX" ]; then
         tmux new 
       fi
+      export PATH=$PATH:$HOME/.local/bin
     '';
     history = {
       size = 10000;
